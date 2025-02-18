@@ -67,6 +67,7 @@ in
   };
   services.gitea.enable = true;
   services.gitea.user = "gitea";
+  services.gitea.settings.server.ROOT_URL = "https://git.mehdibektaoui.com/";
   users.users.root.openssh.authorizedKeys.keys = [
     # change this to your ssh key
     secrets.root_ssh
