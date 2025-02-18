@@ -42,7 +42,7 @@ in
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
     # other Nginx options
-    virtualHosts."git.mehdibektaoui.com" =  {
+    virtualHosts."git.mehdibekhtaoui.com" =  {
       enableACME = true;
       forceSSL = true;
       locations."/" = {
@@ -67,7 +67,7 @@ in
   };
   services.gitea.enable = true;
   services.gitea.user = "gitea";
-  services.gitea.settings.server.ROOT_URL = "https://git.mehdibektaoui.com/";
+  services.gitea.settings.server.ROOT_URL = "https://git.mehdibekhtaoui.com/";
   users.users.root.openssh.authorizedKeys.keys = [
     # change this to your ssh key
     secrets.root_ssh
