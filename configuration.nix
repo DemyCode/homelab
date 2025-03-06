@@ -33,19 +33,15 @@ in
     pkgs.gitMinimal
     pkgs.just
     pkgs.nginx
-    wireguard-mesh-coordinator
+    pkgs.wireguard-tools
+    wireguard-mesh-coordinator.packages.x86_64-linux.default
   ];
 
-  # wireguard
-  # enable NAT
-  networking.nat.enable = true;
-  networking.nat.externalInterface = "eth0";
-  networking.nat.internalInterfaces = [ "wg0" ];
   networking.firewall = {
     enable = true;
     allowedUDPPorts = [ 51820 ];
     allowedTCPPorts = [ 22 ];
   };
-  networking.wireguard.enable = true;
+
   system.stateVersion = "24.05";
 }
