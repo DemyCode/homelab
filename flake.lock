@@ -51,11 +51,124 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1741010256,
+        "narHash": "sha256-WZNlK/KX7Sni0RyqLSqLPbK8k08Kq7H7RijPJbq9KHM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ba487dbc9d04e0634c64e3b1f0d25839a0a68246",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "pyproject-build-systems": {
+      "inputs": {
+        "nixpkgs": [
+          "wireguard-mesh-coordinator",
+          "nixpkgs"
+        ],
+        "pyproject-nix": [
+          "wireguard-mesh-coordinator",
+          "pyproject-nix"
+        ],
+        "uv2nix": [
+          "wireguard-mesh-coordinator",
+          "uv2nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1740362541,
+        "narHash": "sha256-S8Mno07MspggOv/xIz5g8hB2b/C5HPiX8E+rXzKY+5U=",
+        "owner": "pyproject-nix",
+        "repo": "build-system-pkgs",
+        "rev": "e151741c848ba92331af91f4e47640a1fb82be19",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pyproject-nix",
+        "repo": "build-system-pkgs",
+        "type": "github"
+      }
+    },
+    "pyproject-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "wireguard-mesh-coordinator",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1740921768,
+        "narHash": "sha256-4d27TdYoJ8B99b4kU7qESB4QVjiV9gPSuP2/MDqjDWo=",
+        "owner": "pyproject-nix",
+        "repo": "pyproject.nix",
+        "rev": "ca5d23f044943a23cc4274b2d3dea45682dc025f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pyproject-nix",
+        "repo": "pyproject.nix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "disko": "disko",
         "nixos-facter-modules": "nixos-facter-modules",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "wireguard-mesh-coordinator": "wireguard-mesh-coordinator"
+      }
+    },
+    "uv2nix": {
+      "inputs": {
+        "nixpkgs": [
+          "wireguard-mesh-coordinator",
+          "nixpkgs"
+        ],
+        "pyproject-nix": [
+          "wireguard-mesh-coordinator",
+          "pyproject-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1741136175,
+        "narHash": "sha256-9Lv9cUhzs6zwFXqttXyzsr4HApPoIva18bEwKNcPIlw=",
+        "owner": "pyproject-nix",
+        "repo": "uv2nix",
+        "rev": "92e939465b4ace66f9c882f02b4a0ee3712f724f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pyproject-nix",
+        "repo": "uv2nix",
+        "type": "github"
+      }
+    },
+    "wireguard-mesh-coordinator": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2",
+        "pyproject-build-systems": "pyproject-build-systems",
+        "pyproject-nix": "pyproject-nix",
+        "uv2nix": "uv2nix"
+      },
+      "locked": {
+        "lastModified": 1741208202,
+        "narHash": "sha256-QQKVudUfM9zF/uJIq1Ri4voBPop51kHlHKI7oIWX9Yc=",
+        "owner": "DemyCode",
+        "repo": "wireguard-mesh-coordinator",
+        "rev": "2528dc3db6c15895b55f5d575039cb2fbe773d6f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DemyCode",
+        "repo": "wireguard-mesh-coordinator",
+        "type": "github"
       }
     }
   },
