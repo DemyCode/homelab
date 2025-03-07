@@ -42,6 +42,18 @@ in
     allowedUDPPorts = [ 51820 ];
     allowedTCPPorts = [ 22 ];
   };
+  networking.firewall.interfaces."wg0".allowedTCPPorts = [ 8000 ];
+  systemd.services.wireguard-mesh-coordinator = {
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" ];
+      description = "Start the wireguard mesh coordinator service";
+      serviceConfig = {
+        Type = "notify";
+        User = "root";
+        ExecStart = ''${wireguard-mesh-coordinator.packages.x86_64-linux.default}/bin/wireguard-mesh-coordinator api''; 
+        Restart = "always";
+      };
+   };
 
   system.stateVersion = "24.05";
 }
