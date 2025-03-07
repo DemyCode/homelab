@@ -48,10 +48,10 @@ in
       after = [ "network.target" ];
       description = "Start the wireguard mesh coordinator service";
       serviceConfig = {
-        Type = "notify";
         User = "root";
         ExecStart = ''${wireguard-mesh-coordinator.packages.x86_64-linux.default}/bin/wireguard-mesh-coordinator api''; 
         Restart = "always";
+        RestartSec = "5";
       };
    };
 
