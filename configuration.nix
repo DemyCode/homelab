@@ -1,14 +1,6 @@
-{
-  modulesPath,
-  lib,
-  pkgs,
-  wireguard-mesh-coordinator,
-  ...
-}:
-let
-  secrets = builtins.fromTOML (builtins.readFile ./secrets.toml);
-in
-{
+{ modulesPath, lib, pkgs, wireguard-mesh-coordinator, ... }:
+let secrets = builtins.fromTOML (builtins.readFile ./secrets.toml);
+in {
   # nixos anywhere
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -44,16 +36,29 @@ in
   };
   networking.firewall.interfaces."wg0".allowedTCPPorts = [ 8000 ];
   systemd.services.wireguard-mesh-coordinator = {
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
-      description = "Start the wireguard mesh coordinator service";
-      serviceConfig = {
-        User = "root";
-        ExecStart = ''${wireguard-mesh-coordinator.packages.x86_64-linux.default}/bin/wireguard-mesh-coordinator api''; 
-        Restart = "always";
-        RestartSec = "5";
-      };
-   };
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    description = "Start the wireguard mesh coordinator service";
+    serviceConfig = {
+      User = "root";
+      ExecStart =
+        "${wireguard-mesh-coordinator.packages.x86_64-linux.default}/bin/wireguard-mesh-coordinator api";
+      Restart = "always";
+      RestartSec = "5";
+    };
+  };
+  systemd.services.wireguard-mesh-coordinator-enter-network = {
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    description = "Start the wireguard mesh coordinator service";
+    serviceConfig = {
+      User = "root";
+      ExecStart =
+        "${wireguard-mesh-coordinator.packages.x86_64-linux.default}/bin/wireguard-mesh-coordinator enter-network";
+      Restart = "always";
+      RestartSec = "5";
+    };
+  };
 
   system.stateVersion = "24.05";
 }
