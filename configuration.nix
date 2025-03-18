@@ -6,6 +6,7 @@ in {
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
+    ./kubernetes.nix
   ];
   boot.loader.grub = {
     # no need to set devices, disko will add all devices that have a EF02 partition to the list already
@@ -50,7 +51,7 @@ in {
   systemd.services.wireguard-mesh-coordinator-enter-network = {
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
-    description = "Start the wireguard mesh coordinator service";
+    description = "Enter the wireguard mesh network";
     serviceConfig = {
       User = "root";
       ExecStart =
