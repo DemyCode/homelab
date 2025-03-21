@@ -27,6 +27,14 @@ in {
     pkgs.nginx
     pkgs.wireguard-tools
     wireguard-mesh-coordinator.packages.x86_64-linux.default
+    (pkgs.wrapHelm pkgs.kubernetes-helm {
+      plugins = with pkgs.kubernetes-helmPlugins; [
+        helm-secrets
+        helm-diff
+        helm-s3
+        helm-git
+      ];
+    })
   ];
 
   networking.firewall = {
