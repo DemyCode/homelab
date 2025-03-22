@@ -55,14 +55,14 @@ in {
       RestartSec = "5";
     };
   };
-  systemd.services.wireguard-mesh-coordinator-enter-network = {
+  systemd.services.wireguard-mesh-coordinator-solo-network = {
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     description = "Enter the wireguard mesh network";
     serviceConfig = {
       User = "root";
       ExecStart =
-        "${wireguard-mesh-coordinator.packages.x86_64-linux.default}/bin/wireguard-mesh-coordinator enter-network parameter";
+        "${wireguard-mesh-coordinator.packages.x86_64-linux.default}/bin/wireguard-mesh-coordinator solo-network";
       Restart = "always";
       RestartSec = "5";
     };

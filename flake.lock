@@ -142,11 +142,11 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1742675779,
-        "narHash": "sha256-YWRE8voJqlq/qBl1ry9Lj/hIv9EqMmJkFfuCKdEmkWI=",
+        "lastModified": 1742679892,
+        "narHash": "sha256-kKLUKGnEIiIgsZPU90lu3gIbhlA2LdbFo2KlmaDv0/U=",
         "owner": "DemyCode",
         "repo": "wireguard-mesh-coordinator",
-        "rev": "2eb20f9607d591733c1cbefd6466ebb49bf8cb06",
+        "rev": "f240f53e6a8590138ca6b6ec94552487812e4c54",
         "type": "github"
       },
       "original": {

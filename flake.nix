@@ -19,5 +19,16 @@
       ];
       specialArgs = { inherit wireguard-mesh-coordinator; };
     };
+    nixosConfigurations.network-machine = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        disko.nixosModules.disko
+        ./configuration.nix
+        ./hardware-configuration.nix
+        ./kubernetes-master.nix
+        ./kubernetes-node.nix
+      ];
+      specialArgs = { inherit wireguard-mesh-coordinator; };
+    };
   };
 }
