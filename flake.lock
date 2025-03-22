@@ -22,11 +22,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1742268799,
-        "narHash": "sha256-IhnK4LhkBlf14/F8THvUy3xi/TxSQkp9hikfDZRD4Ic=",
+        "lastModified": 1742512142,
+        "narHash": "sha256-8XfURTDxOm6+33swQJu/hx6xw1Tznl8vJJN5HwVqckg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "da044451c6a70518db5b730fe277b70f494188f1",
+        "rev": "7105ae3957700a9646cc4b766f5815b23ed0c682",
         "type": "github"
       },
       "original": {
@@ -142,11 +142,11 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1742250265,
-        "narHash": "sha256-3eWCQbI5m1ccCHAjzGyBSRJwN87B/tV1uZNVAPLXSh0=",
+        "lastModified": 1742675779,
+        "narHash": "sha256-YWRE8voJqlq/qBl1ry9Lj/hIv9EqMmJkFfuCKdEmkWI=",
         "owner": "DemyCode",
         "repo": "wireguard-mesh-coordinator",
-        "rev": "e695395c5d283401ddb656ff53c90b47b1848016",
+        "rev": "2eb20f9607d591733c1cbefd6466ebb49bf8cb06",
         "type": "github"
       },
       "original": {
