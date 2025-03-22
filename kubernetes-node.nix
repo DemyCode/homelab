@@ -13,7 +13,7 @@ in {
   services.kubernetes = let
     api = "https://${kubeMasterHostname}:${toString kubeMasterAPIServerPort}";
   in {
-    roles = [ "node" "node" "node" "node" ];
+    roles = [ "node" ];
     masterAddress = kubeMasterHostname;
     easyCerts = true;
 
