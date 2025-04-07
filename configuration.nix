@@ -43,30 +43,6 @@ in {
     allowedTCPPorts = [ 22 ];
   };
   networking.firewall.interfaces."wg0".allowedTCPPorts = [ 8000 ];
-  systemd.services.wireguard-mesh-coordinator = {
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
-    description = "Start the wireguard mesh coordinator service";
-    serviceConfig = {
-      User = "root";
-      ExecStart =
-        "${wireguard-mesh-coordinator.packages.x86_64-linux.default}/bin/wireguard-mesh-coordinator api";
-      Restart = "always";
-      RestartSec = "5";
-    };
-  };
-  systemd.services.wireguard-mesh-coordinator-solo-network = {
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
-    description = "Enter the wireguard mesh network";
-    serviceConfig = {
-      User = "root";
-      ExecStart =
-        "${wireguard-mesh-coordinator.packages.x86_64-linux.default}/bin/wireguard-mesh-coordinator solo-network";
-      Restart = "always";
-      RestartSec = "5";
-    };
-  };
 
   system.stateVersion = "24.05";
 }
