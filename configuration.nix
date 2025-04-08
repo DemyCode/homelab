@@ -37,11 +37,7 @@ in {
     })
   ];
 
-  networking.firewall = {
-    enable = true;
-    allowedUDPPorts = [ 51820 ];
-    allowedTCPPorts = [ 22 ];
-  };
+  networking.firewall.enable = false;
   networking.firewall.interfaces."wg0".allowedTCPPorts = [ 8000 ];
 
   system.stateVersion = "24.05";
