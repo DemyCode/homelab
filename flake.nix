@@ -14,8 +14,7 @@
         disko.nixosModules.disko
         ./configuration.nix
         ./hardware-configuration.nix
-        ./kubernetes-master.nix
-        ./kubernetes-node.nix
+        ./kubernetes.nix
       ];
       specialArgs = { inherit wireguard-mesh-coordinator; };
     };
