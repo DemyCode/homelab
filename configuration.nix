@@ -37,8 +37,5 @@ in {
     })
   ];
 
-  networking.firewall.enable = false;
-  networking.firewall.interfaces."wg0".allowedTCPPorts = [ 8000 ];
-
   system.stateVersion = "24.05";
 }

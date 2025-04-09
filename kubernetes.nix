@@ -1,15 +1,10 @@
 { config, pkgs, ... }: {
-  networking.extraHosts = "${config.networking.privateIPv4} api.kube";
+  # packages for administration tasks
+  environment.systemPackages = with pkgs; [ kompose kubectl kubernetes ];
   services.kubernetes = {
-    easyCerts = true;
-    addons.dashboard.enable = true;
     roles = [ "master" "node" ];
-    apiserver = {
-      securePort = 443;
-      advertiseAddress = config.networking.privateIPv4;
-    };
-    masterAddress = "api.kube";
+    kubelet.extraOpts = "--fail-swap-on=false";
+    masterAddress = "192.168.1.5";
   };
-  services.dockerRegistry.enable = true;
-  environment.systemPackages = with pkgs; [ kompose kubectl vim ];
+  networking.firewall.enable = false;
 }
