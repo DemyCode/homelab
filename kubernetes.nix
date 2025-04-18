@@ -29,7 +29,7 @@ in {
       ];
     openssh.authorizedKeys.keys = [ secrets.kubernetes_ssh ];
     isNormalUser = true;
-    isSystemUser = true;
+    isSystemUser = false;
   };
   networking.firewall.enable = false;
 }
