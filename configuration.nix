@@ -40,6 +40,7 @@ in {
         pkgs.nginx
         pkgs.wireguard-tools
       ];
+    openssh.authorizedKeys = [ secrets.root_ssh ];
   };
 
   # packages
