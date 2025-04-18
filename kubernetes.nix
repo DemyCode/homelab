@@ -30,4 +30,6 @@ in {
     openssh.authorizedKeys.keys = [ secrets.kubernetes_ssh ];
   };
   networking.firewall.enable = false;
+  isNormalUser = true;
+  isSystemUser = true;
 }
