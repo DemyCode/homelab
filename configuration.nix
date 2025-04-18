@@ -19,23 +19,31 @@ in {
     secrets.root_ssh
   ];
 
-  # packages
-  environment.systemPackages = map lib.lowPrio [
-    pkgs.curl
-    pkgs.gitMinimal
-    pkgs.just
-    pkgs.nginx
-    pkgs.wireguard-tools
-    wireguard-mesh-coordinator.packages.x86_64-linux.default
-    (pkgs.wrapHelm pkgs.kubernetes-helm {
-      plugins = with pkgs.kubernetes-helmPlugins; [
-        helm-secrets
-        helm-diff
-        helm-s3
-        helm-git
+  users.users.kubernetes = {
+    isNormalUser = true;
+    description = "kubernetes";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs;
+      map lib.lowPrio [
+        (pkgs.wrapHelm pkgs.kubernetes-helm {
+          plugins = with pkgs.kubernetes-helmPlugins; [
+            helm-secrets
+            helm-diff
+            helm-s3
+            helm-git
+          ];
+        })
+        wireguard-mesh-coordinator.packages.x86_64-linux.default
+        pkgs.curl
+        pkgs.gitMinimal
+        pkgs.just
+        pkgs.nginx
+        pkgs.wireguard-tools
       ];
-    })
-  ];
+  };
+
+  # packages
+  environment.systemPackages = [ ];
 
   system.stateVersion = "24.05";
 }
