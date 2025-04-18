@@ -1,8 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, wireguard-mesh-coordinator, ... }:
 let secrets = builtins.fromTOML (builtins.readFile ./secrets.toml);
 in {
-
-  # packages for administration tasks
   environment.systemPackages = with pkgs; [ kompose kubectl kubernetes ];
   services.kubernetes = {
     roles = [ "master" "node" ];
