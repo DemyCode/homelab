@@ -19,29 +19,6 @@ in {
     secrets.root_ssh
   ];
 
-  users.users.kubernetes = {
-    description = "kubernetes";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs;
-      map lib.lowPrio [
-        (pkgs.wrapHelm pkgs.kubernetes-helm {
-          plugins = with pkgs.kubernetes-helmPlugins; [
-            helm-secrets
-            helm-diff
-            helm-s3
-            helm-git
-          ];
-        })
-        wireguard-mesh-coordinator.packages.x86_64-linux.default
-        pkgs.curl
-        pkgs.gitMinimal
-        pkgs.just
-        pkgs.nginx
-        pkgs.wireguard-tools
-      ];
-    openssh.authorizedKeys.keys = [ secrets.kubernetes_ssh ];
-  };
-
   # packages
   environment.systemPackages = [ ];
 
