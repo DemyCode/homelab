@@ -29,5 +29,14 @@
       ];
       specialArgs = { inherit wireguard-mesh-coordinator; };
     };
+    devShells."x86_64-linux".default = let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
+    in pkgs.mkShell {
+      packages = [ pkgs.just ];
+      shellHook = ''
+        export PS1="(nix-dev) $PS1"
+      '';
+    };
   };
 }
