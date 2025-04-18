@@ -20,7 +20,6 @@ in {
   ];
 
   users.users.kubernetes = {
-    isNormalUser = true;
     description = "kubernetes";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs;
