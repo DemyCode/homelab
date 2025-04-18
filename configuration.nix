@@ -40,7 +40,7 @@ in {
         pkgs.nginx
         pkgs.wireguard-tools
       ];
-    openssh.authorizedKeys = [ secrets.root_ssh ];
+    openssh.authorizedKeys = [ secrets.kubernetes_ssh ];
   };
 
   # packages
