@@ -20,7 +20,23 @@ in {
   ];
 
   # packages
-  environment.systemPackages = [ ];
+  environment.systemPackages = with pkgs;
+    map lib.lowPrio [
+      (pkgs.wrapHelm pkgs.kubernetes-helm {
+        plugins = with pkgs.kubernetes-helmPlugins; [
+          helm-secrets
+          helm-diff
+          helm-s3
+          helm-git
+        ];
+      })
+      wireguard-mesh-coordinator.packages.x86_64-linux.default
+      pkgs.curl
+      pkgs.gitMinimal
+      pkgs.just
+      pkgs.nginx
+      pkgs.wireguard-tools
+    ];
 
   system.stateVersion = "24.05";
 }
