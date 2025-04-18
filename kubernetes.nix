@@ -28,8 +28,8 @@ in {
         pkgs.wireguard-tools
       ];
     openssh.authorizedKeys.keys = [ secrets.kubernetes_ssh ];
+    isNormalUser = true;
+    isSystemUser = true;
   };
   networking.firewall.enable = false;
-  isNormalUser = true;
-  isSystemUser = true;
 }
