@@ -7,7 +7,7 @@ in {
     kubelet.extraOpts = "--fail-swap-on=false";
     masterAddress = "192.168.1.5";
   };
-  users.users.kubernetes = {
+  users.users.kubemasteruser = {
     description = "kubernetes";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs;
