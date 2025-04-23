@@ -1,10 +1,8 @@
 # Example to create a bios compatible gpt partition
 let
   secrets = builtins.fromTOML (builtins.readFile ./secrets.toml);
-  diskname = secrets.disk_name;  
-in
-{ lib, ... }:
-{
+  diskname = secrets.disk_name;
+in { lib, ... }: {
   disko.devices = {
     disk.disk1 = {
       device = lib.mkDefault diskname;
@@ -48,9 +46,7 @@ in
               type = "filesystem";
               format = "ext4";
               mountpoint = "/";
-              mountOptions = [
-                "defaults"
-              ];
+              mountOptions = [ "defaults" ];
             };
           };
         };

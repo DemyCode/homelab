@@ -18,7 +18,7 @@ in {
     # change this to your ssh key
     secrets.root_ssh
   ];
-
+  services.logind.lidSwitchExternalPower = "ignore";
   # packages
   environment.systemPackages = with pkgs;
     map lib.lowPrio [
