@@ -17,6 +17,10 @@ gitea:
     indexer:
       ISSUE_INDEXER_TYPE: bleve
       REPO_INDEXER_ENABLED: true
+  additionalConfigFromEnvs:
+    - name: GITEA__DATABASE__HOST
+      value: git.mehdibekhtaoui.com
+
 service:
   http:
     type: ClusterIP
