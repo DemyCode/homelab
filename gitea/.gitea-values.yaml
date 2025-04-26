@@ -30,3 +30,5 @@ service:
     type: ClusterIP
     port: 22
     clusterIP:
+
+namespace: "gitea"
