@@ -7,6 +7,10 @@ remote-rebuild HOST SSH_KEY:
 local-rebuild:
     nixos-rebuild switch --flake path:.#generic
 
+directory:
+  mkdir ~/.kube
+  ln -s /etc/kubernetes/cluster-admin.kubeconfig ~/.kube/config
+
 install-gitea:
     helm repo add gitea-charts https://dl.gitea.com/charts/
     helm repo update
