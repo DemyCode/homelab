@@ -60,8 +60,8 @@ services:
       NODE_ENV: production
 
       # -- URLs --
-      PUBLIC_URL: http://[your-server-ip]:3000
-      STORAGE_URL: http://[your-server-ip]:9000/default
+      PUBLIC_URL: http://localhost:3000
+      STORAGE_URL: http://localhost:9000/default
 
       # -- Printer (Chrome) --
       CHROME_TOKEN: chrome_token
