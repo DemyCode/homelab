@@ -4,5 +4,5 @@
 }
 
 resume.mehdibekhtaoui.com {
-    reverse_proxy homepage:80
+    reverse_proxy app:3000
 }

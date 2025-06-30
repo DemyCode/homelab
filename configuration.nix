@@ -33,8 +33,10 @@ in {
     ];
   systemd.services.my-docker-compose = {
     script = ''
-      mkdir -p /var/lib/ny-docker-compose
-      cp ${./docker-compose.yml} /var/lib/my-docker-compose/docker-compose.yml
+      mkdir -p /var/lib/my-docker-compose
+      mkdir -p /var/lib/my-docker-compose/caddy/data
+      mkdir -p /var/lib/my-docker-compose/caddy/config
+      ${pkgs.rsync}/bin/rsync -a --delete ${./.}/ /var/lib/my-docker-compose/
       cd /var/lib/my-docker-compose
       ${pkgs.docker-compose}/bin/docker-compose up --build --remove-orphans
     '';

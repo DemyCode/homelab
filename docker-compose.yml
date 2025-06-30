@@ -18,20 +18,24 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - app-network
 
   # Storage (for image uploads)
   minio:
     image: minio/minio:latest
     restart: unless-stopped
     command: server /data
-    ports:
-      - "9000:9000"
+    
     volumes:
       - minio_data:/data
     environment:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin
+    -etworks:
+      - app-network
 
+  # Storage (for image uploads)
   # Chrome Browser (for printing and previews)
   chrome:
     image: ghcr.io/browserless/chromium:v2.18.0 # Upgrading to newer versions causes issues
@@ -44,7 +48,8 @@ services:
       TOKEN: chrome_token
       EXIT_ON_HEALTH_FAILURE: "true"
       PRE_REQUEST_HEALTH_CHECK: "true"
-  
+    networks:
+      - app-network 
   caddy:
     image: caddy:latest
     container_name: caddy
@@ -56,20 +61,21 @@ services:
     volumes:
       - ./caddy/data:/data
       - ./caddy/config:/config
-      - ./Caddyfdockerile:/etc/caddy/Caddyfile:ro
-    
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    networks:
+      - app-network   
 
   app:
     container_name: app
     image: amruthpillai/reactive-resume:latest
     restart: unless-stopped
-    ports:
-      - "3000:3000"
+    
     depends_on:
       - postgres
       - minio
       - chrome
-    
+    networks:
+      - app-network
     security_opt:
       - no-new-privileges:true
     environment:
@@ -78,8 +84,8 @@ services:
       NODE_ENV: production
 
       # -- URLs --
-      PUBLIC_URL: https://82.164.5.14:3000
-      STORAGE_URL: http://82.164.5.14:9000/default
+      PUBLIC_URL: https://resume.mehdibekhtaoui.com
+      STORAGE_URL: http://minio:9000/default
 
       # -- Printer (Chrome) --
       CHROME_TOKEN: chrome_token
@@ -134,7 +140,9 @@ services:
       # OPENID_SCOPE: openid profile email
       # OPENID_TOKEN_URL:
       # OPENID_USER_INFO_URL:
-
+networks:
+  app-network:
+    driver: bridge
 volumes:
   minio_data:
   postgres_data:
