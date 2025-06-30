@@ -7,17 +7,3 @@ remote-rebuild HOST SSH_KEY:
 local-rebuild:
     nixos-rebuild switch --flake path:.#generic
 
-directory:
-  mkdir ~/.kube
-  ln -s /etc/kubernetes/cluster-admin.kubeconfig ~/.kube/config
-
-install-gitea:
-    helm repo add gitea-charts https://dl.gitea.com/charts/
-    helm repo update
-    helm install gitea gitea-charts/gitea -f manifests/gitea-values.yaml
-
-local-pvc:
-    kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
-    kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
-    kubectl get storageclass
-

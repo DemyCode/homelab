@@ -1,4 +1,4 @@
-{ modulesPath, lib, pkgs, wireguard-mesh-coordinator, ... }:
+{ modulesPath, lib, pkgs, ... }:
 let secrets = builtins.fromTOML (builtins.readFile ./secrets.toml);
 in {
   # nixos anywhere
@@ -21,22 +21,7 @@ in {
   services.logind.lidSwitchExternalPower = "ignore";
   # packages
   environment.systemPackages = with pkgs;
-    map lib.lowPrio [
-      (pkgs.wrapHelm pkgs.kubernetes-helm {
-        plugins = with pkgs.kubernetes-helmPlugins; [
-          helm-secrets
-          helm-diff
-          helm-s3
-          helm-git
-        ];
-      })
-      wireguard-mesh-coordinator.packages.x86_64-linux.default
-      pkgs.curl
-      pkgs.gitMinimal
-      pkgs.just
-      pkgs.nginx
-      pkgs.wireguard-tools
-    ];
+    map lib.lowPrio [ curl gitMinimal just nginx wireguard-tools ];
 
   system.stateVersion = "24.05";
 }
