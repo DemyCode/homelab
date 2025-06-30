@@ -18,10 +18,34 @@ in {
     # change this to your ssh key
     secrets.root_ssh
   ];
+  virtualisation.docker.enable = true;
   services.logind.lidSwitchExternalPower = "ignore";
   # packages
   environment.systemPackages = with pkgs;
-    map lib.lowPrio [ curl gitMinimal just nginx wireguard-tools ];
-
+    map lib.lowPrio [
+      curl
+      gitMinimal
+      just
+      nginx
+      wireguard-tools
+      docker
+      docker-compose
+    ];
+  systemd.services.my-docker-compose = {
+    script = ''
+      mkdir -p /var/lib/ny-docker-compose
+      cp ${./docker-compose.yml} /var/lib/my-docker-compose/docker-compose.yml
+      cd /var/lib/my-docker-compose
+      ${pkgs.docker-compose}/bin/docker-compose up --build --remove-orphans
+    '';
+    path = [ pkgs.docker-compose pkgs.docker ];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "docker.service" "docker.socket" ];
+    requires = [ "docker.service" ];
+    serviceConfig = {
+      WorkingDirectory = "/var/lib/my-docker-compose";
+      StateDirectory = "my-docker-compose";
+    };
+  };
   system.stateVersion = "24.05";
 }

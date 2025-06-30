@@ -1,0 +1,8 @@
+{
+    acme_ca https://acme.zerossl.com/v2/DV90
+    email   verycols@gmail.com
+}
+
+resume.mehdibekhtaoui.com {
+    reverse_proxy homepage:80
+}

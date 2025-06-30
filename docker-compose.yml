@@ -3,7 +3,7 @@
 # If these ports are changed, ensure that the env vars passed to the app are also changed accordingly.
 
 services:
-  # Database (Postgres)
+  
   postgres:
     image: postgres:16-alpine
     restart: unless-stopped
@@ -44,8 +44,23 @@ services:
       TOKEN: chrome_token
       EXIT_ON_HEALTH_FAILURE: "true"
       PRE_REQUEST_HEALTH_CHECK: "true"
+  
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./caddy/data:/data
+      - ./caddy/config:/config
+      - ./Caddyfdockerile:/etc/caddy/Caddyfile:ro
+    
 
   app:
+    container_name: app
     image: amruthpillai/reactive-resume:latest
     restart: unless-stopped
     ports:
@@ -54,14 +69,17 @@ services:
       - postgres
       - minio
       - chrome
+    
+    security_opt:
+      - no-new-privileges:true
     environment:
       # -- Environment Variables --
       PORT: 3000
       NODE_ENV: production
 
       # -- URLs --
-      PUBLIC_URL: http://localhost:3000
-      STORAGE_URL: http://localhost:9000/default
+      PUBLIC_URL: https://82.164.5.14:3000
+      STORAGE_URL: http://82.164.5.14:9000/default
 
       # -- Printer (Chrome) --
       CHROME_TOKEN: chrome_token
