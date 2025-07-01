@@ -3,7 +3,7 @@
 # If these ports are changed, ensure that the env vars passed to the app are also changed accordingly.
 
 services:
-  postgres:
+  resume-postgres:
     image: postgres:16-alpine
     restart: unless-stopped
     volumes:
@@ -59,19 +59,18 @@ services:
       - "443:443"
       - "443:443/udp"
     volumes:
-      - ./caddy/data:/data
-      - ./caddy/config:/config
+      - caddy_data:/data
+      - caddy_config:/config
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
     networks:
       - app-network   
 
-  app:
-    container_name: app
+  resume-app:
+    container_name: resume-app
     image: amruthpillai/reactive-resume:latest
     restart: unless-stopped
-    
     depends_on:
-      - postgres
+      - resume-postgres
       - minio
       - chrome
     networks:
@@ -85,14 +84,14 @@ services:
 
       # -- URLs --
       PUBLIC_URL: https://resume.mehdibekhtaoui.com
-      STORAGE_URL: http://minio:9000/default
+      STORAGE_URL: https://resume-download.mehdibekhtaoui.com/default
 
       # -- Printer (Chrome) --
       CHROME_TOKEN: chrome_token
       CHROME_URL: ws://chrome:3000
 
       # -- Database (Postgres) --
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/postgres
+      DATABASE_URL: postgresql://postgres:postgres@resume-postgres:5432/postgres
 
       # -- Auth --
       ACCESS_TOKEN_SECRET: access_token_secret
@@ -142,9 +141,42 @@ services:
       # OPENID_USER_INFO_URL:
     ports:
       - "3000:3000"
+
+  nextcloud-maria-db:
+    image: mariadb:10.6
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    volumes:
+      - nextcloud_maria_db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_PASSWORD=
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+
+  nextcloud:
+    container_name: nextcloud
+    image: nextcloud
+    restart: always
+    ports:
+      - 8080:8080
+    links:
+      - nextcloud-maria-db
+    volumes:
+      - nextcloud_data:/var/www/html
+    environment:
+      - MYSQL_PASSWORD=
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=db
+
 networks:
   app-network:
     driver: bridge
 volumes:
   minio_data:
   postgres_data:
+  nextcloud_maria_db_data:
+  nextcloud_data:
+  caddy_data:
+  caddy_config:

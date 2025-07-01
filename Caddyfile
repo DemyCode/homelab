@@ -1,3 +1,11 @@
 resume.mehdibekhtaoui.com {
     reverse_proxy app:3000
 }
+
+resume-download.mehdibekhtaoui.com {
+  reverse_proxy app:9000
+}
+
+nextcloud.mehdibekhtaoui.com {
+    reverse_proxy nextcloud:8080
+}
