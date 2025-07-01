@@ -1,5 +1,7 @@
 { modulesPath, lib, pkgs, ... }:
-let secrets = builtins.fromTOML (builtins.readFile ./secrets.toml);
+let
+  secrets = builtins.fromTOML (builtins.readFile ./secrets.toml);
+  files = ./.;
 in {
   # nixos anywhere
   imports = [
@@ -33,21 +35,15 @@ in {
     ];
   systemd.services.my-docker-compose = {
     script = ''
-      mkdir -p /var/lib/my-docker-compose
-      mkdir -p /var/lib/my-docker-compose/caddy/data
-      mkdir -p /var/lib/my-docker-compose/caddy/config
-      ${pkgs.rsync}/bin/rsync -a --delete ${./.}/ /var/lib/my-docker-compose/
-      cd /var/lib/my-docker-compose
-      ${pkgs.docker-compose}/bin/docker-compose up --build --remove-orphans
+      rm -rf /deployments
+      mkdir /deployments
+      cp -r ${files}/* /deployments/
+      docker-compose -f /deployments/docker-compose.yml up --build --remove-orphans --force-recreate 
     '';
     path = [ pkgs.docker-compose pkgs.docker ];
     wantedBy = [ "multi-user.target" ];
     after = [ "docker.service" "docker.socket" ];
     requires = [ "docker.service" ];
-    serviceConfig = {
-      WorkingDirectory = "/var/lib/my-docker-compose";
-      StateDirectory = "my-docker-compose";
-    };
   };
   system.stateVersion = "24.05";
 }

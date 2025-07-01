@@ -1,6 +1,5 @@
 {
-    acme_ca https://acme.zerossl.com/v2/DV90
-    email   verycols@gmail.com
+    email verycols@gmail.com
 }
 
 resume.mehdibekhtaoui.com {

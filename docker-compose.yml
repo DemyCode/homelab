@@ -32,7 +32,7 @@ services:
     environment:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin
-    -etworks:
+    networks:
       - app-network
 
   # Storage (for image uploads)
@@ -140,6 +140,8 @@ services:
       # OPENID_SCOPE: openid profile email
       # OPENID_TOKEN_URL:
       # OPENID_USER_INFO_URL:
+    ports:
+      - "3000:3000"
 networks:
   app-network:
     driver: bridge
