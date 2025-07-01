@@ -3,7 +3,6 @@
 # If these ports are changed, ensure that the env vars passed to the app are also changed accordingly.
 
 services:
-  
   postgres:
     image: postgres:16-alpine
     restart: unless-stopped
@@ -50,6 +49,7 @@ services:
       PRE_REQUEST_HEALTH_CHECK: "true"
     networks:
       - app-network 
+
   caddy:
     image: caddy:latest
     container_name: caddy
