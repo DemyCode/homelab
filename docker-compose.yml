@@ -153,6 +153,8 @@ services:
       - MYSQL_PASSWORD=password
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
+    networks:
+      - app-network
 
   nextcloud:
     container_name: nextcloud
@@ -169,6 +171,8 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=nextcloud-maria-db
+    networks:
+      - app-network
 
 networks:
   app-network:
