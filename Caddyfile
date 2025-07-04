@@ -1,4 +1,11 @@
+resume-editor.mehdibekhtaoui.com {
+    reverse_proxy resume-app:3000
+}
+
 resume.mehdibekhtaoui.com {
+    # Only redirect the exact root path
+    @root path / 
+    redir @root /demycode/mehdi-bekhtaoui 308
     reverse_proxy resume-app:3000
 }
 

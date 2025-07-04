@@ -25,7 +25,7 @@ services:
     image: minio/minio:latest
     restart: unless-stopped
     command: server /data
-    
+
     volumes:
       - minio_data:/data
     environment:
@@ -48,7 +48,7 @@ services:
       EXIT_ON_HEALTH_FAILURE: "true"
       PRE_REQUEST_HEALTH_CHECK: "true"
     networks:
-      - app-network 
+      - app-network
 
   caddy:
     image: caddy:latest
@@ -63,7 +63,7 @@ services:
       - caddy_config:/config
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
     networks:
-      - app-network   
+      - app-network
 
   resume-app:
     container_name: resume-app
@@ -110,6 +110,8 @@ services:
       STORAGE_SECRET_KEY: minioadmin
       STORAGE_USE_SSL: "false"
       STORAGE_SKIP_BUCKET_CHECK: "false"
+
+      DISABLE_SIGNUPS: true
 
       # -- Crowdin (Optional) --
       # CROWDIN_PROJECT_ID:
@@ -171,12 +173,15 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=nextcloud-maria-db
+      - NEXTCLOUD_TRUSTED_DOMAINS=nextcloud.mehdibekhtaoui.com mehdibekhtaoui.com
+      - APACHE_DISABLE_REWRITE_IP=1
     networks:
       - app-network
 
 networks:
   app-network:
     driver: bridge
+
 volumes:
   minio_data:
   postgres_data:
