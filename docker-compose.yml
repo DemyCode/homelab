@@ -7,7 +7,7 @@ services:
     image: postgres:16-alpine
     restart: unless-stopped
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - /opt/data/postgres_data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
@@ -25,7 +25,7 @@ services:
     command: server /data
 
     volumes:
-      - minio_data:/data
+      - /opt/data/minio_data:/data
     environment:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin
@@ -139,7 +139,7 @@ services:
     restart: always
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     volumes:
-      - nextcloud_maria_db_data:/var/lib/mysql
+      - /opt/data/nextcloud_maria_db_data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_PASSWORD=password
@@ -155,7 +155,7 @@ services:
     links:
       - nextcloud-maria-db
     volumes:
-      - nextcloud_data:/var/www/html
+      - /opt/data/nextcloud_data:/var/www/html
     environment:
       - MYSQL_PASSWORD=password
       - MYSQL_DATABASE=nextcloud
@@ -172,7 +172,7 @@ services:
     #   service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
     volumes:
       # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
-      - immich_data:/usr/src/app/upload
+      - /opt/data/immich_data:/usr/src/app/upload
       # - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
@@ -220,16 +220,10 @@ services:
       # DB_STORAGE_TYPE: 'HDD'
     volumes:
       # Do not edit the next line. If you want to change the database storage location on your system, edit the value of DB_DATA_LOCATION in the .env file
-      - immich_database:/var/lib/postgresql/data
+      - /opt/data/immich_database:/var/lib/postgresql/data
     restart: always
 
 volumes:
-  minio_data:
-  postgres_data:
-  nextcloud_maria_db_data:
-  nextcloud_data:
   caddy_data:
   caddy_config:
-  immich_database:
-  immich_data:
   model-cache:
