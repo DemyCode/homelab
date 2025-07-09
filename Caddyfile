@@ -10,9 +10,13 @@ resume.mehdibekhtaoui.com {
 }
 
 resume-download.mehdibekhtaoui.com {
-  reverse_proxy resume-app:9000
+    reverse_proxy resume-app:9000
 }
 
 nextcloud.mehdibekhtaoui.com {
     reverse_proxy nextcloud:80
+}
+
+immich.mehdibekhtaoui.com {
+    reverse_proxy immich-server:2283
 }

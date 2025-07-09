@@ -37,7 +37,7 @@ in {
     script = ''
       rm -rf /deployments
       mkdir /deployments
-      cp -r ${files}/* /deployments/
+      cp -r ${files}/. /deployments/
       docker-compose -f /deployments/docker-compose.yml up --build --remove-orphans --force-recreate 
     '';
     path = [ pkgs.docker-compose pkgs.docker ];
