@@ -20,3 +20,7 @@ nextcloud.mehdibekhtaoui.com {
 immich.mehdibekhtaoui.com {
     reverse_proxy immich-server:2283
 }
+
+vaultwarden.mehdibekhtaoui.com {
+    reverse_proxy vaultwarden:80
+}

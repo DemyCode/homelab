@@ -164,6 +164,15 @@ services:
       - NEXTCLOUD_TRUSTED_DOMAINS=nextcloud.mehdibekhtaoui.com mehdibekhtaoui.com
       - APACHE_DISABLE_REWRITE_IP=1
 
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      DOMAIN: "https://vaultwarden.mehdibekhtaoui.com"
+    volumes:
+      - /opt/data/vw-data/:/data/
+
   immich-server:
     container_name: immich-server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
