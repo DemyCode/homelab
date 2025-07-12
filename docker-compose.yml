@@ -131,8 +131,6 @@ services:
       # OPENID_SCOPE: openid profile email
       # OPENID_TOKEN_URL:
       # OPENID_USER_INFO_URL:
-    ports:
-      - "3000:3000"
 
   nextcloud-maria-db:
     image: mariadb:10.6
@@ -150,8 +148,6 @@ services:
     container_name: nextcloud
     image: nextcloud
     restart: always
-    ports:
-      - 8080:80
     links:
       - nextcloud-maria-db
     volumes:
@@ -185,8 +181,6 @@ services:
       # - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
-    ports:
-      - "2283:2283"
     depends_on:
       - redis
       - database
