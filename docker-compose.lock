@@ -1,0 +1,25 @@
+services:
+  caddy:
+    image: docker.io/library/caddy:latest@sha256:f880657326733fb266a317b4ee31d6a3090a6bbff3dcb0c97833093810d59b46
+  chrome:
+    image: ghcr.io/browserless/chromium:v2.18.0@sha256:b0adebacc9b737505e3de46b1feec1f184410b22091a778f94fd09bcc48806f1
+  database:
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:5f6a838e4e44c8e0e019d0ebfe3ee8952b69afc2809b2c25f7b0119641978e91
+  immich-machine-learning:
+    image: ghcr.io/immich-app/immich-machine-learning:release@sha256:9f2f61d86af82d04926f9b896c995c502303052905517c5485dd26bf1e42a44e
+  immich-server:
+    image: ghcr.io/immich-app/immich-server:release@sha256:df5bbf4e29eff4688063a005708f8b96f13073200b4a7378f7661568459b31e9
+  minio:
+    image: docker.io/minio/minio:latest@sha256:064117214caceaa8d8a90ef7caa58f2b2aeb316b5156afe9ee8da5b4d83e12c8
+  nextcloud:
+    image: docker.io/library/nextcloud:latest@sha256:40d3c4f6eea3b1e0bfdfd1c4f3cf9bbe2e29fcf87cf9c61fc198eb68a6ac8952
+  nextcloud-maria-db:
+    image: docker.io/library/mariadb:10.6@sha256:7589b386fa6686a5d5f131b504ed21c81e492c48b78c6c4be0d5be1066542559
+  redis:
+    image: docker.io/valkey/valkey@sha256:fec42f399876eb6faf9e008570597741c87ff7662a54185593e74b09ce83d177
+  resume-app:
+    image: docker.io/amruthpillai/reactive-resume:latest@sha256:53ce201e15d79535494d278fd13658f57d0331f2b5eba12163bf38b879366c65
+  resume-postgres:
+    image: docker.io/library/postgres:16-alpine@sha256:ef2235fd13b6cb29728a98ee17862ff5c9b7d20515a9b34804da4a45062695f6
+  vaultwarden:
+    image: docker.io/vaultwarden/server:latest@sha256:48267ea14d8649b2e553a5fe290c40b5dd94d54e9a24b26ae7134a75a659695f

@@ -38,7 +38,7 @@ in {
       rm -rf /deployments
       mkdir /deployments
       cp -r ${files}/. /deployments/
-      docker-compose -f /deployments/docker-compose.yml up --build --remove-orphans --force-recreate 
+      docker-compose -f /deployments/docker-compose.yml -f /deployments/docker-compose.lock up --build --remove-orphans --force-recreate
     '';
     path = [ pkgs.docker-compose pkgs.docker ];
     wantedBy = [ "multi-user.target" ];

@@ -7,3 +7,5 @@ remote-rebuild HOST SSH_KEY:
 local-rebuild:
     nixos-rebuild switch --flake path:.#generic
 
+docker-update:
+    docker compose config --lock-image-digests > docker-compose.lock
