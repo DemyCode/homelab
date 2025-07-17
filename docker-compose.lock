@@ -1,10 +1,12 @@
 services:
   caddy:
-    image: docker.io/library/caddy:latest@sha256:f880657326733fb266a317b4ee31d6a3090a6bbff3dcb0c97833093810d59b46
+    image: docker.io/library/caddy:latest@sha256:5ce77de8c70cbdbd17ea69162b5a0539503fb9e1a9329cce42dc0f54821cc2af
   chrome:
     image: ghcr.io/browserless/chromium:v2.18.0@sha256:b0adebacc9b737505e3de46b1feec1f184410b22091a778f94fd09bcc48806f1
   database:
     image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:5f6a838e4e44c8e0e019d0ebfe3ee8952b69afc2809b2c25f7b0119641978e91
+  db:
+    image: docker.io/library/postgres:17@sha256:3962158596daaef3682838cc8eb0e719ad1ce520f88e34596ce8d5de1b6330a1
   immich-machine-learning:
     image: ghcr.io/immich-app/immich-machine-learning:release@sha256:9f2f61d86af82d04926f9b896c995c502303052905517c5485dd26bf1e42a44e
   immich-server:
@@ -20,6 +22,8 @@ services:
   resume-app:
     image: docker.io/amruthpillai/reactive-resume:latest@sha256:53ce201e15d79535494d278fd13658f57d0331f2b5eba12163bf38b879366c65
   resume-postgres:
-    image: docker.io/library/postgres:16-alpine@sha256:ef2235fd13b6cb29728a98ee17862ff5c9b7d20515a9b34804da4a45062695f6
+    image: docker.io/library/postgres:16-alpine@sha256:7c688148e5e156d0e86df7ba8ae5a05a2386aaec1e2ad8e6d11bdf10504b1fb7
   vaultwarden:
     image: docker.io/vaultwarden/server:latest@sha256:48267ea14d8649b2e553a5fe290c40b5dd94d54e9a24b26ae7134a75a659695f
+  vikunja:
+    image: docker.io/vikunja/vikunja:latest@sha256:ed1f3ed467fecec0b57e9de7bc6607f8bbcbb23ffced6a81f5dfefc794cdbe3b

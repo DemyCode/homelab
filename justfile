@@ -8,4 +8,4 @@ local-rebuild:
     nixos-rebuild switch --flake path:.#generic
 
 docker-update:
-    docker compose config --lock-image-digests > docker-compose.lock
+    docker compose config --lock-image-digests | tee docker-compose.lock

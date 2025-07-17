@@ -24,3 +24,7 @@ immich.mehdibekhtaoui.com {
 vaultwarden.mehdibekhtaoui.com {
     reverse_proxy vaultwarden:80
 }
+
+vikunja.mehdibekhtaoui.com {
+    reverse_proxy vikunja:3456
+}
