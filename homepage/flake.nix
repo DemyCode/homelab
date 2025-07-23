@@ -25,6 +25,8 @@
             pkgs.fish
             pkgs.trunk
             pkgs.leptosfmt
+
+            pkgs.wasm-bindgen-cli
           ];
           shellHook = ''
             rustup show
@@ -39,14 +41,13 @@
         buildInputs = [
           pkgs.rustup
           pkgs.trunk
+          pkgs.wasm-bindgen-cli
         ];
         buildPhase = ''
           export RUSTUP_HOME=$out/.rustup
           export CARGO_HOME=$out/.cargo
-          export RUSTUP_USE_CURL=1
-          export RUSTUP_DIST_SERVER=https://static.rust-lang.org 
           rustup show
-          trunk build --release
+          trunk build --release --offline
         '';
         installPhase = ''
           mkdir -p $out/bin
