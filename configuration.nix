@@ -1,8 +1,14 @@
-{ modulesPath, lib, pkgs, ... }:
+{
+  modulesPath,
+  lib,
+  pkgs,
+  ...
+}:
 let
   secrets = builtins.fromTOML (builtins.readFile ./secrets.toml);
   files = ./.;
-in {
+in
+{
   # nixos anywhere
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -23,7 +29,8 @@ in {
   virtualisation.docker.enable = true;
   services.logind.lidSwitchExternalPower = "ignore";
   # packages
-  environment.systemPackages = with pkgs;
+  environment.systemPackages =
+    with pkgs;
     map lib.lowPrio [
       curl
       gitMinimal
@@ -38,11 +45,17 @@ in {
       rm -rf /deployments
       mkdir /deployments
       cp -r ${files}/. /deployments/
-      docker-compose -f /deployments/docker-compose.yml -f /deployments/docker-compose.lock up --build --remove-orphans --force-recreate
+      docker-compose -f /deployments/docker-compose.yml -f /deployments/docker-compose-lock.yml up --build --remove-orphans --force-recreate
     '';
-    path = [ pkgs.docker-compose pkgs.docker ];
+    path = [
+      pkgs.docker-compose
+      pkgs.docker
+    ];
     wantedBy = [ "multi-user.target" ];
-    after = [ "docker.service" "docker.socket" ];
+    after = [
+      "docker.service"
+      "docker.socket"
+    ];
     requires = [ "docker.service" ];
   };
   system.stateVersion = "24.05";
