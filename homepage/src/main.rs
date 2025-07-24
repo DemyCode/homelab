@@ -8,5 +8,5 @@ fn main() {
 #[component]
 fn App() -> impl IntoView {
     let (count, set_count) = signal(0);
-    view! { <body>Hello everyone! Welcome to my website.     </body   > }
+    view! { <div>Hello everyone! Welcome to my website.</div> }
 }

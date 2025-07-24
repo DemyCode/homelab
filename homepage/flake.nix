@@ -2,11 +2,8 @@
   description = "Build a cargo project";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-
     crane.url = "github:ipetkov/crane";
-
     flake-utils.url = "github:numtide/flake-utils";
-
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,18 +24,14 @@
       let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [ (import rust-overlay) ];
+          overlays = [
+            (import rust-overlay)
+          ];
         };
 
         inherit (pkgs) lib;
 
-        rustToolchainFor =
-          p:
-          p.rust-bin.stable.latest.default.override {
-            # Set the build targets supported by the toolchain,
-            # wasm32-unknown-unknown is required for trunk
-            targets = [ "wasm32-unknown-unknown" ];
-          };
+        rustToolchainFor = p: p.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
         craneLib = (crane.mkLib pkgs).overrideToolchain rustToolchainFor;
 
         # When filtering sources, we want to allow assets other than .rs files
@@ -147,7 +140,8 @@
           };
         };
 
-        packages.default = my-app;
+        packages.default = serve-app;
+        packages.app = serve-app;
 
         apps.default = flake-utils.lib.mkApp {
           drv = serve-app;
@@ -165,6 +159,8 @@
             pkgs.rustup
             pkgs.trunk
             pkgs.fish
+            pkgs.wasm-bindgen-cli
+            pkgs.leptosfmt
           ];
           shellHook = ''
             rustup show
