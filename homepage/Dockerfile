@@ -1,5 +1,8 @@
+# Nix builder
 FROM nixos/nix:latest AS builder
 
+WORKDIR /app
 COPY . /app
+RUN nix build path:.  --extra-experimental-features 'nix-command flakes' --no-link
 
-RUN nix build gg
+CMD [ "nix", "run", "--extra-experimental-features", "nix-command flakes", "path:." ]
