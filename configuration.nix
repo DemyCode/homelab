@@ -42,14 +42,13 @@ in
     ];
   systemd.services.my-docker-compose = {
     script = ''
-      rm -rf /deployments
-      mkdir /deployments
-      cp -r ${files}/. /deployments/
+      rsync -azP --delete --delete-excluded --filter=":- .gitignore" --exclude .git/ ${files}/ /deployments/
       docker-compose -f /deployments/docker-compose.yml -f /deployments/docker-compose-lock.yml up --build --remove-orphans --force-recreate
     '';
     path = [
       pkgs.docker-compose
       pkgs.docker
+      pkgs.rsync
     ];
     wantedBy = [ "multi-user.target" ];
     after = [

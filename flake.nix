@@ -31,7 +31,8 @@
             pkgs.docker
             pkgs.docker-compose
             pkgs.fish
-
+            pkgs.rsync
+            pkgs.just
           ];
           shellHook = ''
             fish
