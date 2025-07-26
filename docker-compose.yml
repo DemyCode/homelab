@@ -257,6 +257,9 @@ services:
       interval: 2s
       start_period: 30s
 
+  homepage:
+    build: homepage
+
 volumes:
   caddy_data:
   caddy_config:

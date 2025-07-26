@@ -28,3 +28,7 @@ vaultwarden.mehdibekhtaoui.com {
 vikunja.mehdibekhtaoui.com {
     reverse_proxy vikunja:3456
 }
+
+mehdibekhtaoui.com {
+    reverse_proxy homepage:80
+}
