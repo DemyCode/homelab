@@ -11,7 +11,7 @@ fn App() -> impl IntoView {
     view! {
         <div>
             <div>Currently a Machine Learning engineer for PhysicsX</div>
-            <div>Mail: <a href="mailto:mail@mehdibekhtaoui.com">mail.mehdibekhtaoui.com</a></div>
+            <div>Mail: <a href="mailto:mail@mehdibekhtaoui.com">mail@mehdibekhtaoui.com</a></div>
             <div>
                 <a href="https://resume.mehdibekhtaoui.com">resume.mehdibekhtaoui.com</a>
                 (Might not work on mobile)
