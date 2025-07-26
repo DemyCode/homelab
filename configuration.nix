@@ -43,7 +43,7 @@ in
   systemd.services.my-docker-compose = {
     script = ''
       rsync -azP --delete --delete-excluded --filter=":- .gitignore" --exclude .git/ ${files}/ /deployments/
-      docker-compose -f /deployments/docker-compose.yml -f /deployments/docker-compose-lock.yml up --build --remove-orphans --force-recreate
+      docker-compose -f /deployments/docker-compose.yml -f /deployments/docker-compose-lock.yml up --build --remove-orphans
     '';
     path = [
       pkgs.docker-compose
