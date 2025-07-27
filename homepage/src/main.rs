@@ -17,7 +17,7 @@ fn App() -> impl IntoView {
                 (Might not work on mobile)
             </div>
             <div>
-                <a href="https://github.com/DemyCode"></a>
+                <a href="https://github.com/DemyCode">github</a>
             </div>
             <div>
                 <a href="https://www.linkedin.com/in/mehdi-bekhtaoui-0463a9152/">linkedIn</a>
