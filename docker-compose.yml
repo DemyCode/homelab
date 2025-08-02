@@ -260,6 +260,16 @@ services:
   homepage:
     build: homepage
 
+  i2p:
+    image: geti2p/i2p
+    volumes:
+      - /opt/data/i2pconfig:/i2p/.i2p
+      - /opt/data/i2ptorrents:/i2psnark
+    ports:
+      - "4444:4444" # I2P HTTP Proxy
+      - "7657:7657" # I2P Console
+      - "7070:7070" # I2P Tunnel
+
 volumes:
   caddy_data:
   caddy_config:
