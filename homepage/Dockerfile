@@ -1,6 +1,5 @@
 # Nix builder
 FROM nixos/nix:latest AS builder
-
 # Copy our source and setup our working dir.
 COPY . /tmp/build
 WORKDIR /tmp/build
