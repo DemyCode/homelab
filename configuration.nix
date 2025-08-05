@@ -40,6 +40,7 @@ in
       docker
       docker-compose
     ];
+  nix.gc.automatic = true;
   systemd.services.my-docker-compose = {
     script = ''
       mkdir -p /deployments
