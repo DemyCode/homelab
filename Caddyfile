@@ -10,7 +10,7 @@ resume.mehdibekhtaoui.com {
 }
 
 resume-download.mehdibekhtaoui.com {
-    reverse_proxy resume-app:9000
+    reverse_proxy minio:9000
 }
 
 nextcloud.mehdibekhtaoui.com {
@@ -31,4 +31,15 @@ vikunja.mehdibekhtaoui.com {
 
 mehdibekhtaoui.com {
     reverse_proxy homepage:80
+}
+
+mail.mehdibekhtaoui.com {
+  # Optionally provision RSA 2048-bit certificate instead of ECDSA P-256:
+  tls {
+    key_type rsa2048
+  }
+
+  # Optional, can be useful for troubleshooting
+  # connection to Caddy with correct certificate:
+  respond "Hello DMS"
 }

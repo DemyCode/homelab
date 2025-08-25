@@ -14,7 +14,13 @@ fn App() -> impl IntoView {
             <div>Mail: <a href="mailto:mail@mehdibekhtaoui.com">mail@mehdibekhtaoui.com</a></div>
             <div>
                 <a href="https://resume.mehdibekhtaoui.com">resume.mehdibekhtaoui.com</a>
-                (Might not work on mobile)
+                /
+                <a
+                    href="https://resume.mehdibekhtaoui.com/api/resume/print/cmcw0djzf0003m22wffwy0d22"
+                    target="_blank"
+                >
+                    PDFVersion
+                </a>
             </div>
             <div>
                 <a href="https://github.com/DemyCode">github</a>

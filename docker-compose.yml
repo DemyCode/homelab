@@ -53,8 +53,8 @@ services:
       - "443:443"
       - "443:443/udp"
     volumes:
-      - caddy_data:/data
-      - caddy_config:/config
+      - /opt/data/caddy/data:/data
+      - /opt/data/caddy/config:/config
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
 
   resume-app:
@@ -73,7 +73,7 @@ services:
       NODE_ENV: production
 
       # -- URLs --
-      PUBLIC_URL: https://resume.mehdibekhtaoui.com
+      PUBLIC_URL: https://resume-editor.mehdibekhtaoui.com
       STORAGE_URL: https://resume-download.mehdibekhtaoui.com/default
 
       # -- Printer (Chrome) --
@@ -257,8 +257,8 @@ services:
       interval: 2s
       start_period: 30s
 
-  homepage:
-    build: homepage
+  # homepage:
+  #   build: homepage
 
   i2p:
     image: geti2p/i2p
@@ -270,7 +270,42 @@ services:
       - "7657:7657" # I2P Console
       - "7070:7070" # I2P Tunnel
 
+  tor:
+    image: nixos/nix
+    command: "nix run nixpkgs#tor --extra-experimental-features 'nix-command flakes'"
+
+  mailserver:
+    image: ghcr.io/docker-mailserver/docker-mailserver:latest
+    container_name: mailserver
+    # Provide the FQDN of your mail server here (Your DNS MX record should point to this value)
+    hostname: mail.mehdibekhtaoui.com
+    domainname: mehdibekhtaoui.com
+    ports:
+      - "25:25"
+      - "465:465"
+      - "587:587"
+      - "993:993"
+    volumes:
+      - /opt/data/dms/mail-data/:/var/mail/
+      - /opt/data/dms/mail-state/:/var/mail-state/
+      - /opt/data/dms/mail-logs/:/var/log/mail/
+      - /opt/data/dms/config/:/tmp/docker-mailserver/
+      # - /etc/localtime:/etc/localtime:ro
+      - /opt/data/caddy/data/certificates/acme-v02.api.letsencrypt.org-directory/mail.mehdibekhtaoui.com/mail.mehdibekhtaoui.com.crt:/etc/letsencrypt/live/mail.mehdibekhtaoui.com/fullchain.pem
+      - /opt/data/caddy/data/certificates/acme-v02.api.letsencrypt.org-directory/mail.mehdibekhtaoui.com/mail.mehdibekhtaoui.com.key:/etc/letsencrypt/live/mail.mehdibekhtaoui.com/privkey.pem
+    environment:
+      - ENABLE_RSPAMD=1
+      - ENABLE_CLAMAV=1
+      - ENABLE_FAIL2BAN=1
+      - SSL_TYPE=letsencrypt
+      - ENABLE_SPAMASSASSIN=1
+      - ENABLE_POSTGREY=1
+      - ONE_DIR=1
+      - OVERRIDE_HOSTNAME=mail.mehdibekhtaoui.com
+    cap_add:
+      - NET_ADMIN # For Fail2Ban to work
+      - SYS_PTRACE # For ClamAV to work
+    restart: always
+
 volumes:
-  caddy_data:
-  caddy_config:
   model-cache:

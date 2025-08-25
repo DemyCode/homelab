@@ -45,11 +45,9 @@ in
     script = ''
       mkdir -p /deployments
       rsync -avP --delete --delete-excluded --filter=":- .gitignore" --exclude .git/ ${files}/ /deployments
-      cd deployments
+      cd /deployments
+      docker-compose -f docker-compose.yml -f docker-compose-lock.yml up --build --remove-orphans --force-recreate --detach --wait
       docker system prune --all --force
-      docker-compose down 
-      docker-compose build --pull --no-cache
-      docker-compose up --build --remove-orphans --force-recreate
     '';
     path = [
       pkgs.docker-compose
