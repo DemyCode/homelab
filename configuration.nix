@@ -43,7 +43,9 @@ in
   nix.gc.automatic = true;
   systemd.services.my-docker-compose = {
     script = ''
+      rm -rf /deployments
       mkdir -p /deployments
+      echo "Syncing files to /deployments from ${files}"
       rsync -avP --delete --delete-excluded --filter=":- .gitignore" --exclude .git/ ${files}/ /deployments
       cd /deployments
       docker-compose -f docker-compose.yml -f docker-compose-lock.yml up --build --remove-orphans --force-recreate --detach --wait
