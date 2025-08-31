@@ -39,6 +39,8 @@ in
       wireguard-tools
       docker
       docker-compose
+      dysk
+      ctop
     ];
   nix.gc.automatic = true;
   systemd.services.my-docker-compose = {
