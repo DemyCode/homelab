@@ -303,6 +303,26 @@ services:
     #   - NET_ADMIN # For Fail2Ban to work
     #   - SYS_PTRACE # For ClamAV to work
     restart: always
+    user: 991:991
+
+  synapse-init:
+    image: matrixdotorg/synapse:latest
+    command:
+      - generate
+    environment:
+      SYNAPSE_SERVER_NAME: "mehdibekhtaoui.com"
+      SYNAPSE_REPORT_STATS: "no"
+    volumes:
+      - /opt/data/synapse/data:/data
+
+  synapse:
+    image: matrixdotorg/synapse:latest
+    restart: unless-stopped
+    volumes:
+      - /opt/data/synapse/data:/data
+    depends_on:
+      synapse-init:
+        condition: service_completed_successfully
 
 volumes:
   model-cache:

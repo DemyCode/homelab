@@ -30,6 +30,11 @@ vikunja.mehdibekhtaoui.com {
 }
 
 mehdibekhtaoui.com {
+    header /.well-known/matrix/* Content-Type application/json
+    header /.well-known/matrix/* Access-Control-Allow-Origin *
+    respond /.well-known/matrix/server "{\"m.server\": \"matrix.mehdibekhtaoui.com:443\"}"
+    respond /.well-known/matrix/client "{\"m.homeserver\":{\"base_url\":\"https://matrix.mehdibekhtaoui.com\"},\"m.identity_server\":{\"base_url\":\"https://identity.mehdibekhtaoui.com\"}}"
+
     reverse_proxy homepage:80
 }
 
@@ -43,3 +48,10 @@ mail.mehdibekhtaoui.com {
   # connection to Caddy with correct certificate:
   respond "Hello DMS"
 }
+
+matrix.mehdibekhtaoui.com {
+  reverse_proxy /_matrix/* synapse:8008
+  reverse_proxy /_synapse/client/* synapse:8008
+  reverse_proxy synapse:8008
+}
+
