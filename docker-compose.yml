@@ -324,5 +324,14 @@ services:
       synapse-init:
         condition: service_completed_successfully
 
+  strfry:
+    image: dockurr/strfry
+    container_name: strfry
+    volumes:
+      - /opt/data/strfry/strfry-db:/app/strfry-db
+      - ./strfry.conf:/etc/strfry.conf
+    restart: always
+    stop_grace_period: 2m
+
 volumes:
   model-cache:

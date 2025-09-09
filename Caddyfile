@@ -55,3 +55,6 @@ matrix.mehdibekhtaoui.com {
   reverse_proxy synapse:8008
 }
 
+nostr.mehdibekhtaoui.com {
+    reverse_proxy nostr:7777
+}
