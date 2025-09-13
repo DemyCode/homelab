@@ -25,10 +25,6 @@ vaultwarden.mehdibekhtaoui.com {
     reverse_proxy vaultwarden:80
 }
 
-vikunja.mehdibekhtaoui.com {
-    reverse_proxy vikunja:3456
-}
-
 mehdibekhtaoui.com {
     header /.well-known/matrix/* Content-Type application/json
     header /.well-known/matrix/* Access-Control-Allow-Origin *
@@ -56,5 +52,5 @@ matrix.mehdibekhtaoui.com {
 }
 
 nostr.mehdibekhtaoui.com {
-    reverse_proxy nostr:7777
+    reverse_proxy strfry:7777
 }

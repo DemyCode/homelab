@@ -1,24 +1,24 @@
 services:
   caddy:
-    image: docker.io/library/caddy:latest@sha256:4163a5c7b7631707956db4057720ec75de429992d5e3aa518d54872c01644dbe
+    image: docker.io/library/caddy:latest@sha256:87aa104ed6c658991e1b0672be271206b7cd9fec452d1bf3ed9ad6f8ab7a2348
   chrome:
     image: ghcr.io/browserless/chromium:v2.18.0@sha256:b0adebacc9b737505e3de46b1feec1f184410b22091a778f94fd09bcc48806f1
   database:
-    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:8d292bdb796aa58bbbaa47fe971c8516f6f57d6a47e7172e62754feb6ed4e7b0
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:c44be5f2871c59362966d71eab4268170eb6f5653c0e6170184e72b38ffdf107
   db:
-    image: docker.io/library/postgres:17@sha256:d17be73073d6e73a005c239c67b8c9f0331925d05bd874964f445a9f698fbf72
+    image: docker.io/library/postgres:17@sha256:feff5b24fedd610975a1f5e743c51a4b360437f4dc3a11acf740dcd708f413f6
   i2p:
-    image: docker.io/geti2p/i2p:latest@sha256:17873f7c994f58013b58b3cf885381a9ac092d574468230fa2a2ee3956c1003a
+    image: docker.io/geti2p/i2p:latest@sha256:fda8811eeb80542f11f99cfa6f357ec122c2e5172fc8d24c793857f09ef8c575
   immich-machine-learning:
-    image: ghcr.io/immich-app/immich-machine-learning:release@sha256:6239f9852f2ccd8bef52b161629a8fc62bac7636750c06e5fe021e994bab4781
+    image: ghcr.io/immich-app/immich-machine-learning:release@sha256:5e9cc6b9717e34f3cdc591aa860d6d29c990405ef87ad057ef95f73096ae6f29
   immich-server:
-    image: ghcr.io/immich-app/immich-server:release@sha256:d97aea4b3f59989a79c6adffb39a1a8b95dd27c90a7f79280b1176a6220cf17b
+    image: ghcr.io/immich-app/immich-server:release@sha256:29f12a20fd1975c9df06d99a65658cec40bf2357fb597499c32ee50a75f250ea
   mailserver:
     image: ghcr.io/docker-mailserver/docker-mailserver:latest@sha256:af51b15dd3fc72153c0e90eb7692bb5e3a463212d87959a80fa7aa89b617d44a
   minio:
     image: docker.io/minio/minio:latest@sha256:14cea493d9a34af32f524e538b8346cf79f3321eff8e708c1e2960462bd8936e
   nextcloud:
-    image: docker.io/library/nextcloud:latest@sha256:fcf637074755bb1d27644441b938bf39b27dd6c0a8c2326a5752e1b3d5014366
+    image: docker.io/library/nextcloud:latest@sha256:92bc503ea0c19789f402b0469ecfb8df1ffea81e2bf90a45bba39063a626aa00
   nextcloud-maria-db:
     image: docker.io/library/mariadb:10.6@sha256:dfa1e9754b18bb69cababe26d2915debf5c8e56d5e9bfaadc893a852e952c0ae
   redis:
@@ -26,14 +26,16 @@ services:
   resume-app:
     image: docker.io/amruthpillai/reactive-resume:latest@sha256:53ce201e15d79535494d278fd13658f57d0331f2b5eba12163bf38b879366c65
   resume-postgres:
-    image: docker.io/library/postgres:16-alpine@sha256:8ffca822c1933bdc8be7dbbe9c2330974bdb43f5027f47717772fa35925412b0
+    image: docker.io/library/postgres:16-alpine@sha256:1c6d2f6e4d30d49c529e09a627e8178db5011dde88d955eb08db2e135e64aa09
+  strfry:
+    image: docker.io/dockurr/strfry:latest@sha256:df140472554e5a0b5bbe08ec417805d283098621833e44827d8018c98b74243d
   synapse:
-    image: docker.io/matrixdotorg/synapse:latest@sha256:3a002f2771cf9433eb5a6bd25f9f0e3e06f44010e74c2a990f9d7c44a1c955bc
+    image: docker.io/matrixdotorg/synapse:latest@sha256:672bad6bac9d5b4e1ec488560c7c90cdbb20dec8a4717a1065012866a4b46337
   synapse-init:
-    image: docker.io/matrixdotorg/synapse:latest@sha256:3a002f2771cf9433eb5a6bd25f9f0e3e06f44010e74c2a990f9d7c44a1c955bc
+    image: docker.io/matrixdotorg/synapse:latest@sha256:672bad6bac9d5b4e1ec488560c7c90cdbb20dec8a4717a1065012866a4b46337
   tor:
     image: docker.io/nixos/nix:latest@sha256:24196c350d146529a4101edea9c82129308640b500ebbc01d225ad36b6322cb6
   vaultwarden:
     image: docker.io/vaultwarden/server:latest@sha256:84fd8a47f58d79a1ad824c27be0a9492750c0fa5216b35c749863093bfa3c3d7
   vikunja:
-    image: docker.io/vikunja/vikunja:latest@sha256:52c4d3509c4b0ed3bc0bf06355008745be3674d4398f17b6987b06ef42ec219e
+    image: docker.io/vikunja/vikunja:latest@sha256:3839751335af9e8f8f7105021ef2c7bd1c9cf6fcf01ec122cd6431f7ba24a756
