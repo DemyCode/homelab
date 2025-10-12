@@ -250,9 +250,6 @@ services:
       interval: 2s
       start_period: 30s
 
-  # homepage:
-  #   build: homepage
-
   i2p:
     image: geti2p/i2p
     volumes:
