@@ -43,6 +43,10 @@ in
       ctop
     ];
   nix.gc.automatic = true;
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   systemd.services.my-docker-compose = {
     script = ''
       mkdir -p /deployments
@@ -63,6 +67,22 @@ in
       "docker.socket"
     ];
     requires = [ "docker.service" ];
+  };
+  systemd.services.yolab-manager = {
+    script = ''
+      cd /deployments/yolab-manager
+      echo "Starting yolab-manager"
+      nix run path:.
+    '';
+    path = [
+      pkgs.nix
+      pkgs.gitMinimal
+    ];
+    wantedBy = [ "multi-user.target" ];
+    after = [
+      "my-docker-compose.service"
+    ];
+    requires = [ "my-docker-compose.service" ];
   };
   system.stateVersion = "24.05";
 }
