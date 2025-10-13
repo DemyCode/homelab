@@ -6,7 +6,7 @@ requires-python = ">=3.12"
 dependencies = ["fastapi[standard,uvicorn]>=0.119.0"]
 
 [project.scripts]
-hello = "yolab_manager:main.serve"
+yolab-manager = "yolab_manager:main.serve"
 
 [build-system]
 requires = ["uv_build>=0.9.0,<0.10.0"]

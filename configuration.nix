@@ -71,7 +71,6 @@ in
   systemd.services.yolab-manager = {
     script = ''
       cd /deployments/yolab-manager
-      echo "Starting yolab-manager"
       nix run path:.
     '';
     path = [

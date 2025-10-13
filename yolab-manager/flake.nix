@@ -25,6 +25,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       pyproject-nix,
       uv2nix,
@@ -61,9 +62,17 @@
             ]
           )
       );
+
       packages = forAllSystems (system: {
         default = pythonSets.${system}.mkVirtualEnv "yolab-manager-env" workspace.deps.default;
       });
+
+      # Create a wrapper script that ensures proper Python environment
+      makeApp = system: pkg: {
+        type = "app";
+        program = "${pkg}/bin/yolab-manager";
+      };
+
     in
     {
       devShells = forAllSystems (
@@ -71,7 +80,7 @@
         let
           pkgs = nixpkgs.legacyPackages.${system};
           pythonSet = pythonSets.${system}.overrideScope editableOverlay;
-          virtualenv = pythonSet.mkVirtualEnv "yolab-manager-dev-env" workspace.deps.all;
+          virtualenv = pythonSet.mkVirtualEnv "yolab-manager-env" workspace.deps.all;
         in
         {
           default = pkgs.mkShell {
@@ -95,11 +104,13 @@
       );
 
       packages = packages;
+
       apps = forAllSystems (system: {
-        default = {
-          type = "app";
-          program = "${packages.${system}.default}/bin/hello";
-        };
+        default = makeApp system packages.${system}.default;
+        yolab-manager = makeApp system packages.${system}.default;
       });
+
+      # Also expose the package as a default package for `nix run`
+      defaultPackage = forAllSystems (system: packages.${system}.default);
     };
 }
