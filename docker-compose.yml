@@ -180,6 +180,8 @@ services:
     restart: always
     healthcheck:
       disable: false
+    ports:
+      - "2283:2283"
 
   immich-machine-learning:
     container_name: immich_machine_learning

@@ -53,7 +53,7 @@ in
       echo "Syncing files to /deployments from ${files}"
       rsync -avP --delete --delete-excluded --filter=":- .gitignore" --exclude .git/ ${files}/ /deployments
       cd /deployments
-      docker-compose -f docker-compose.yml -f docker-compose-lock.yml up --build --remove-orphans --detach
+      docker-compose -f docker-compose.yml -f docker-compose-lock.yml up --build --remove-orphans --detach --force-recreate
       docker system prune --all --force
     '';
     path = [
