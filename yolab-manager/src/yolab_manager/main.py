@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import os
 from pathlib import Path
+import subprocess
 
 app = FastAPI()
 
@@ -10,10 +10,13 @@ app = FastAPI()
 def health():
     git_repo_path = Path("/deployments")
     if git_repo_path.exists() and git_repo_path.is_dir():
-        os.chdir(git_repo_path)
-        os.system("git pull")
+        subprocess.Popen("git pull", cwd="/deployments", shell=True)
     else:
-        os.system("git clone https://github.com/DemyCode/homelab /deployments")
+        subprocess.Popen(
+            "git clone https://github.com/DemyCode/homelab /deployments", shell=True
+        )
+    if not Path("/deployments/hardware-configuration.nix").exists():
+        subprocess.Popen("nixos-generate-config --no-filesystems --dir /deployments")
 
 
 def serve():
