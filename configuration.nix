@@ -47,6 +47,7 @@ in
     "nix-command"
     "flakes"
   ];
+  networking.firewall.enable = false;
   systemd.services.my-docker-compose = {
     script = ''
       mkdir -p /deployments
